@@ -66,7 +66,7 @@ Skill 内置了8个精准诊断工具，在每次交互时自动检查：
 
 ```bash
 # Clone 到你的项目目录
-git clone https://github.com/your-username/life-coach.git ~/projects/life-coach
+git clone https://github.com/y2hhbw/life_coach.git ~/projects/life-coach
 ```
 
 #### 2. 整合到 Obsidian 库
