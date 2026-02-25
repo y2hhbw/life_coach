@@ -69,11 +69,11 @@ WEEKLY_TEMPLATE = {VAULT_ROOT}/templates/weekly_template.md
 
 ## 🔍 8 个精准诊断工具 (Diagnostic Lenses)
 
-**触发机制：** 这些诊断工具在 morning/night/do check 时自动执行。通过读取日报内容，分析是否触发相应的 Lens，然后提出 coach 建议。
+**触发机制：** 这些诊断工具在 morning/night/check 时自动执行。通过读取日报内容，分析是否触发相应的 Lens，然后提出 coach 建议。
 
 **执行时机：**
 - morning：读取昨日日报，检查是否有需要延续的问题
-- do check：读取今日日报，检查当前状态
+- check：读取今日日报，检查当前状态
 - night：读取今日日报，进行全面复盘
 
 ### Lens 1: 目标连线 (Hierarchy Check)
@@ -297,6 +297,8 @@ STEP 3: IF percentage > 20% THEN
 
 ## 标准作业程序 (SOP Workflows)
 
+**AI 执行准则：当用户触发此 Skill 时，你必须首先解析触发指令（如 morning, check, night, weekly），然后匹配并严格执行下方对应的 SOP。**
+
 ### SOP-A: 早间规划 (Morning Routine)
 
 **触发指令：** `morning`
@@ -319,7 +321,7 @@ STEP 0: Verify core files exist
 
 ```
 STEP 1: 读取背景上下文
-  ACTION: Read {DAILY_DIR}/{YYYY}/{MM}/{YYYY-MM-DD-1}.md (昨日日志，如不存在则跳过)
+  ACTION: 计算昨日的具体日期，然后 Read {DAILY_DIR}/[昨日路径].md (昨日日志，如不存在则跳过)
   ACTION: Read {GOAL_2026}
   ACTION: Read {ANTI_VISION}
 
@@ -363,7 +365,7 @@ STEP 4: 创建今日日报
 
 ```
 STEP 1: 读取今日日志
-  ACTION: Read {DAILY_DIR}/{YYYY}/{MMM}/{YYYY-MMM-DD}.md
+  ACTION: Read {DAILY_DIR}/{YYYY}/{MM}/{YYYY-MM-DD}.md
 
   IF file not exists THEN
     ERROR: "今天还没有创建日志。请先运行 'morning' 进行规划。"
@@ -405,7 +407,7 @@ STEP 3: 按优先级执行诊断工具检查并生成报告
 
   CHECK 1: Lens 7 - 净值警报 (Priority 1)
     ACTION: Read {NAV_TRACKER}
-    IF NAV declining OR happenings_count > 3 THEN
+    IF NAV declining AND happenings_count > 3 THEN
       ADD Lens_7 to triggered_lenses
 
   CHECK 2: Lens 1 - 目标连线 (Priority 2)
@@ -597,7 +599,7 @@ OUTPUT: "复盘完成。"
 
 ```
 每日日志:
-  Path: {VAULT_ROOT}/journal/journal/{YYYY}/{MM}/{YYYY-MM-DD}.md
+  Path: {VAULT_ROOT}/journal/daily/{YYYY}/{MM}/{YYYY-MM-DD}.md
   Format: 参考 journal_template.md
   Sections:
     - intentions (goal)
@@ -757,7 +759,7 @@ Assistant: EXECUTE SOP-A (Morning Routine)
 ### 示例 2: 日间检查
 
 ```
-User: do check
+User: check
 
 Assistant: EXECUTE SOP-B (Daytime Monitor)
   - Read today's journal
@@ -790,5 +792,5 @@ Assistant: EXECUTE SOP-C (Review Routine)
 5. **增强精确性**：添加了错误处理、文件路径、触发条件
 
 **使用方式：**
-- 触发指令：`morning` / `night` / `weekly` / `do check`
+- 触发指令：`morning` / `night` / `weekly` / `check`
 - 或直接调用：`/life-system-coach`

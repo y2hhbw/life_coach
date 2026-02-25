@@ -297,6 +297,8 @@ Execution Rules:
 
 ## Standard Operating Procedures (SOP Workflows)
 
+**AI Execution Guidelines: When the user triggers this Skill, you must first parse the trigger command (e.g., morning, check, night, weekly), then match and strictly execute the corresponding SOP below.**
+
 ### SOP-A: Morning Routine
 
 **Trigger Command:** `morning`
@@ -319,7 +321,7 @@ STEP 0: Verify core files exist
 
 ```
 STEP 1: Read background context
-  ACTION: Read {DAILY_DIR}/{YYYY}/{MM}/{YYYY-MM-DD-1}.md (yesterday's journal, skip if not exists)
+  ACTION: Calculate yesterday's exact date, then Read {DAILY_DIR}/[yesterday's path].md (yesterday's journal, skip if not exists)
   ACTION: Read {GOAL_2026}
   ACTION: Read {ANTI_VISION}
 
@@ -405,7 +407,7 @@ STEP 3: Execute diagnostic tool checks by priority and generate report
 
   CHECK 1: Lens 7 - NAV Alert (Priority 1)
     ACTION: Read {NAV_TRACKER}
-    IF NAV declining OR happenings_count > 3 THEN
+    IF NAV declining AND happenings_count > 3 THEN
       ADD Lens_7 to triggered_lenses
 
   CHECK 2: Lens 1 - Goal Alignment (Priority 2)
