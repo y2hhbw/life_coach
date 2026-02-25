@@ -82,50 +82,25 @@ Your deepest desires, anxieties, financials, and diary details remain entirely s
 1. **Clone the Project**
 ```bash
 git clone https://github.com/y2hhbw/life_coach.git ~/projects/life-coach
+cd ~/projects/life-coach
 ```
 
-2. **Multi-language Version Selection**
-The default `SKILL.md` is the Chinese coach. If you prefer a pure English coaching environment, please use `SKILL_en.md` and the English templates:
-- For English: In the next step, copy `SKILL_en.md` and rename it to `life-coach.md`, then use `daily_template.md` and `weekly_template.md` in Obsidian.
-- For Chinese: In the next step, copy `SKILL.md`, then use `daily_template_zh.md` and `weekly_template_zh.md` in Obsidian.
+2. **Run the Interactive Installation Script**
+The easiest way to install and configure the system is to run the interactive setup script. This will automatically copy the necessary templates and journal folders to your Obsidian vault, and configure the Claude Code Skill.
 
-3. **Integrate with Obsidian Vault (Recommended)**
-For the system to run smoothly, the easiest method is to simply move/copy these journal folders into your Obsidian vault:
-
-**📦 Universal Copy Method (For All Operating Systems):**
-This is the most error-proof method.
-- Open the `~/projects/life-coach` folder you just cloned.
-- Copy the `journal` folder and the `templates` folder inside.
-- Open the folder corresponding to your Obsidian vault.
-- Paste them directly into the root directory of your Obsidian vault.
-
-*[Optional: For Advanced Users]*
-If you are familiar with the terminal and want your codebase and note vault to stay strictly synchronized via symbolic links, you can use the following commands:
 - **Mac / Linux:**
   ```bash
-  cd /path/to/your/Obsidian/vault
-  ln -s ~/projects/life-coach/journal ./journal
-  ln -s ~/projects/life-coach/templates ./templates
+  chmod +x install.sh
+  ./install.sh
   ```
-- **Windows (Requires running CMD as Administrator):**
-  ```cmd
-  cd \path\to\your\Obsidian\vault
-  mklink /D journal "%HOMEPATH%\projects\life-coach\journal"
-  mklink /D templates "%HOMEPATH%\projects\life-coach\templates"
+- **Windows (PowerShell):**
+  ```powershell
+  .\install.ps1
   ```
 
-4. **Configure and Install the Skill**
-Open and edit your chosen Skill file (`SKILL_en.md` or `SKILL.md`), and update the `VAULT_ROOT` to match your actual Obsidian vault path:
+*Follow the on-screen prompts to select your language (English/Chinese) and provide the absolute path to your Obsidian vault.*
 
-```bash
-# Copy the chosen skill to the Claude Code skills directory
-# If you use the English version:
-cp ~/projects/life-coach/SKILL_en.md ~/.claude/skills/life-coach.md
-# If you use the Chinese version:
-# cp ~/projects/life-coach/SKILL.md ~/.claude/skills/life-coach.md
-```
-
-5. **Initialize Core Files**
+3. **Initialize Core Files**
 Open Obsidian, and create your vision/goal files based on the structure:
 - `journal/vision_2028/plan.md` - Define your 2028 vision
 - `journal/vision_2028/anti-vision.md` - The nightmare future to avoid
