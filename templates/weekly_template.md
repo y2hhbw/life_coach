@@ -4,109 +4,109 @@ period: {start_date} to {end_date}
 tags: [weekly, journal]
 ---
 
-# 周报（{start_date}–{end_date}）
+# Weekly Report ({start_date}–{end_date})
 
-> [!note]- 快速索引
-> - i. 整体概览
-> - ii. 核心进展与成果
-> - iii. 健康与习惯
-> - iv. 学习与成长
-> - v. 情绪与反思
-> - vi. 未完成/待推进事项
-> - vii. 下周重点方向
-
----
-
-## 一、整体概览
-> [!summary] 本周摘要
-> - 本周主题：
-> - 关键成果：
-> - 目标进展：
-> - 重要事件：
-> - 整体感受：
+> [!note]- Quick Index
+> - i. Overall Summary
+> - ii. Core Progress & Results
+> - iii. Health & Habits
+> - iv. Learning & Growth
+> - v. Emotions & Reflections
+> - vi. Pending/In-Progress Items
+> - vii. Next Week Priorities
 
 ---
 
-## 二、核心进展与成果
-### 1) 工作与项目
-✅ **完成的事项：**
--
-
-🚧 **进行中的项目：**
--
-
-### 2) 关键突破与里程碑
-🎯 **重要成果**
--
-
-### 3) 遇到的挑战
-❌ **问题与解决方案：**
--
+## I. Overall Summary
+> [!summary] Week Summary
+> - Week Theme:
+> - Key Results:
+> - Goal Progress:
+> - Important Events:
+> - Overall Feeling:
 
 ---
 
-## 三、健康与习惯
-> [!info] 身心状态
+## II. Core Progress & Results
+### 1) Work & Projects
+✅ **Completed Items:**
+-
 
-### 💪 身体健康
-- **运动情况**：
-- **饮食状况**：
-- **睡眠质量**：
+🚧 **Ongoing Projects:**
+-
 
-### 🧘 习惯养成
-- **坚持的好习惯**：
-- **需要改进的习惯**：
+### 2) Key Breakthroughs & Milestones
+🎯 **Important Results**
+-
 
-### ⚠️ 健康提醒
+### 3) Challenges Encountered
+❌ **Problems & Solutions:**
 -
 
 ---
 
-## 四、学习与成长
-### 📚 知识积累
-- **学习内容**：
-- **阅读/课程**：
+## III. Health & Habits
+> [!info] Physical & Mental State
 
-### 🛠️ 技能提升
-- **新技能**：
-- **工具优化**：
+### 💪 Physical Health
+- **Exercise**:
+- **Diet**:
+- **Sleep Quality**:
 
-### 💡 思考与洞察
+### 🧘 Habit Formation
+- **Good Habits Maintained**:
+- **Habits to Improve**:
+
+### ⚠️ Health Reminders
 -
 
 ---
 
-## 五、情绪与反思
-> [!quote] 本周心路历程
+## IV. Learning & Growth
+### 📚 Knowledge Accumulation
+- **Learning Content**:
+- **Reading/Courses**:
 
-### 💭 情绪状态
-- **积极情绪**：
-- **消极情绪**：
-- **情绪触发点**：
+### 🛠️ Skill Development
+- **New Skills**:
+- **Tool Optimization**:
 
-### 🤔 深度反思
-- **本周最大收获**：
-- **需要改进的地方**：
-- **对目标的思考**：
+### 💡 Thoughts & Insights
+-
 
 ---
 
-## 六、未完成/待推进事项
-> [!todo] 待办清单
+## V. Emotions & Reflections
+> [!quote] This Week's Journey
 
-### 🔴 高优先级
+### 💭 Emotional State
+- **Positive Emotions**:
+- **Negative Emotions**:
+- **Emotional Triggers**:
+
+### 🤔 Deep Reflection
+- **Biggest Gain This Week**:
+- **Areas to Improve**:
+- **Thoughts on Goals**:
+
+---
+
+## VI. Pending/In-Progress Items
+> [!todo] Todo List
+
+### 🔴 High Priority
 - [ ]
 
-### 🟡 中优先级
+### 🟡 Medium Priority
 - [ ]
 
-### 🟢 低优先级/长期跟踪
+### 🟢 Low Priority/Long-term Tracking
 - [ ]
 
 ---
 
-## 七、下周重点方向
-> [!important] 下周重点
+## VII. Next Week Priorities
+> [!important] Next Week Focus
 
 1.
 2.
@@ -114,14 +114,14 @@ tags: [weekly, journal]
 
 ---
 
-## 📊 本周数据快照
-- **完成日报数**：
-- **目标达成率**：
-- **时间投入**：
-- **关键指标**：
-- **本周亮点**：
+## 📊 Weekly Data Snapshot
+- **Daily Journals Completed**:
+- **Goal Achievement Rate**:
+- **Time Investment**:
+- **Key Metrics**:
+- **Week Highlights**:
 
 ---
 
-> [!success] 本周总结
+> [!success] Week Summary
 >

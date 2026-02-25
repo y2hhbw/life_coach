@@ -16,7 +16,7 @@ author: halliday
 
 ### Required Environment Variables
 ```
-VAULT_ROOT = /home/halliday/Documents/obsidian/y2hhbw
+VAULT_ROOT = /path/to/your/obsidian/vault
 ```
 
 ### Core File Paths
@@ -44,8 +44,8 @@ Daily Journal Path Structure:
 
 ### Template Paths
 ```
-DAILY_TEMPLATE = {VAULT_ROOT}/templates/daily_template.md
-WEEKLY_TEMPLATE = {VAULT_ROOT}/templates/weekly_template.md
+DAILY_TEMPLATE = {VAULT_ROOT}/templates/daily_template_zh.md
+WEEKLY_TEMPLATE = {VAULT_ROOT}/templates/weekly_template_zh.md
 ```
 
 ---
@@ -374,17 +374,17 @@ STEP 1: 读取今日日志
 STEP 2: 验证数据完整性并分析日志状态
   ACTION: Parse daily content
 
-  VERIFY sections exist:
-    - intentions
-    - happenings
-    - action items
-    - feelings
+  VERIFY sections exist (支持中英双语标签):
+    - intentions / 意图
+    - happenings / 发生的事
+    - action items / 行动清单
+    - feelings / 感受
 
   IF any section missing THEN
     WARN: "日志结构不完整，缺少 [section_name] 部分"
 
   EXTRACT Top 1:
-    - Read intentions section
+    - Read intentions/意图 section
     - IF multiple intentions THEN
       - Take first intention as Top 1
     - IF no intentions THEN
@@ -469,12 +469,12 @@ STEP 6: 自动追加记录
   ACTION: Read current daily file
 
   IF user specifies "happenings" THEN
-    LOCATE: "## Happenings" section
+    LOCATE: "## Happenings" / "## 发生的事" section
     APPEND after last entry:
       "- [{HH:mm}] - [用户提供的内容]"
 
   IF user specifies "feelings" THEN
-    LOCATE: "## Feelings" section
+    LOCATE: "## Feelings" / "## 感受" section
     APPEND after last entry:
       "- [{HH:mm}] - [用户提供的内容]"
 
@@ -547,10 +547,10 @@ STEP 3: 执行复盘逻辑
       Format: 2026-02-07_2026-02-13.md
       Content: [包含以下7个部分]
         1. 整体概览 (Overall Summary)
-        2. 核心进展与成果 (Key Progress & Results)
-        3. 运营与维护 (Operations & Maintenance)
-        4. 工具与工作流建设 (Tools & Workflow)
-        5. 市场与情绪记录 (Market & Emotions)
+        2. 核心进展与成果 (Core Progress & Results)
+        3. 健康与习惯 (Health & Habits)
+        4. 学习与成长 (Learning & Growth)
+        5. 情绪与反思 (Emotions & Reflections)
         6. 未完成/待推进事项 (Pending Tasks)
         7. 下周重点方向 (Next Week Priorities)
 

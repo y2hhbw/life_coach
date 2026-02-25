@@ -16,7 +16,7 @@ author: halliday
 
 ### Required Environment Variables
 ```
-VAULT_ROOT = /home/halliday/Documents/obsidian/y2hhbw
+VAULT_ROOT = /path/to/your/obsidian/vault
 ```
 
 ### Core File Paths
@@ -44,8 +44,8 @@ Daily Journal Path Structure:
 
 ### Template Paths
 ```
-DAILY_TEMPLATE = {VAULT_ROOT}/templates/daily_template_en.md
-WEEKLY_TEMPLATE = {VAULT_ROOT}/templates/weekly_template_en.md
+DAILY_TEMPLATE = {VAULT_ROOT}/templates/daily_template.md
+WEEKLY_TEMPLATE = {VAULT_ROOT}/templates/weekly_template.md
 ```
 
 ---
@@ -548,9 +548,9 @@ STEP 3: Execute review logic
       Content: [includes following 7 sections]
         1. Overall Summary
         2. Core Progress & Results
-        3. Operations & Maintenance
-        4. Tools & Workflow
-        5. Market & Emotions
+        3. Health & Habits
+        4. Learning & Growth
+        5. Emotions & Reflections
         6. Pending Tasks
         7. Next Week Priorities
 

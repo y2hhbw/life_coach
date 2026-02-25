@@ -85,27 +85,48 @@ graph TD
 git clone https://github.com/y2hhbw/life_coach.git ~/projects/life-coach
 ```
 
-2. **整合到 Obsidian 库（推荐）**
-我们提供了完整的日志结构模板，你只需要将其整合到你的 Obsidian 本地库中：
+2. **多语言版本选择 (Multi-language)**
+默认的 `SKILL.md` 为中文教练，如果你更喜欢纯英文教练环境，请使用 `SKILL_en.md` 并使用英文模板：
+- 中文版：请在下一步中复制 `SKILL.md`，并在 Obsidian 中使用 `daily_template_zh.md` 和 `weekly_template_zh.md`。
+- 英文版：请在下一步中复制 `SKILL_en.md` 单独重命名为 `life-coach.md`，使用 `daily_template.md` 和 `weekly_template.md`。
 
-```bash
-# 假设你的 Obsidian 库路径是 ~/Documents/obsidian/my-vault
-cd ~/Documents/obsidian/my-vault
+3. **整合到 Obsidian 库（推荐）**
+为了让系统能在你的设备上顺畅运行，最简单的做法是直接将这些日记文件夹移动/复制到你的 Obsidian 库中：
 
-# 创建符号链接（或直接复制文件）
-ln -s ~/projects/life-coach/journal ./journal
-ln -s ~/projects/life-coach/templates ./templates
-```
+**📦 通用复制法 (所有系统均适用)：**
+这是最不容易出错的方法。
+- 打开你在刚才 Clone 下来的 `~/projects/life-coach` 文件夹。
+- 复制里面的 `journal` 文件夹和 `templates` 文件夹。
+- 打开你的 Obsidian 库对应的文件夹。
+- 将它们直接粘贴到你的 Obsidian 库的根目录下。
 
-3. **配置并安装 Skill**
-打开并编辑 Skill 文件 (`SKILL.md`)，将其中的 `VAULT_ROOT` 修改为你实际的 Obsidian 库路径：
+*[可选：对于高阶玩家]*
+如果你熟悉终端并且希望代码库和你的笔记库保持硬性的软链接同步，可以使用如下命令：
+- **Mac / Linux:**
+  ```bash
+  cd /你的/Obsidian/库路径
+  ln -s ~/projects/life-coach/journal ./journal
+  ln -s ~/projects/life-coach/templates ./templates
+  ```
+- **Windows (需要使用管理员权限运行 CMD):**
+  ```cmd
+  cd \你的\Obsidian\库路径
+  mklink /D journal "%HOMEPATH%\projects\life-coach\journal"
+  mklink /D templates "%HOMEPATH%\projects\life-coach\templates"
+  ```
+
+4. **配置并安装 Skill**
+打开并编辑你选择的 Skill 文件 (`SKILL.md` 或 `SKILL_en.md`)，将其中的 `VAULT_ROOT` 修改为你实际的 Obsidian 库路径：
 
 ```bash
 # 修改完成后，将 skill 复制到 Claude Code skills 目录
+# 如果你使用中文版：
 cp ~/projects/life-coach/SKILL.md ~/.claude/skills/life-coach.md
+# 如果你使用英文版：
+# cp ~/projects/life-coach/SKILL_en.md ~/.claude/skills/life-coach.md
 ```
 
-4. **初始化核心文件**
+5. **初始化核心文件**
 进入你的 Obsidian，根据模板创建自己的愿景和目标文件：
 - `journal/vision_2028/plan.md` - 定义你的 2028 年愿景
 - `journal/vision_2028/anti-vision.md` - 描述你想避免的未来
