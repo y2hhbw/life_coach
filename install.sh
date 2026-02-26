@@ -84,9 +84,10 @@ case "$TOOL_CHOICE" in
 esac
 
 # Configure Skill
-mkdir -p "$SKILLS_DIR"
+DEST_SKILL_DIR="$SKILLS_DIR/life-coach"
+mkdir -p "$DEST_SKILL_DIR"
 
-DEST_SKILL_FILE="$SKILLS_DIR/life-coach.md"
+DEST_SKILL_FILE="$DEST_SKILL_DIR/SKILL.md"
 
 print_msg "Configuring $TOOL_NAME Skill..." "正在配置 $TOOL_NAME Skill..."
 

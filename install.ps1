@@ -100,11 +100,12 @@ if ($LangChoice -eq "1") {
 
 # Configure Skill
 Write-Host $ConfigMsg
-if (-not (Test-Path -Path $SkillsDir)) {
-    New-Item -ItemType Directory -Force -Path $SkillsDir | Out-Null
+$DestSkillDir = Join-Path -Path $SkillsDir -ChildPath "life-coach"
+if (-not (Test-Path -Path $DestSkillDir)) {
+    New-Item -ItemType Directory -Force -Path $DestSkillDir | Out-Null
 }
 
-$DestSkillFile = Join-Path -Path $SkillsDir -ChildPath "life-coach.md"
+$DestSkillFile = Join-Path -Path $DestSkillDir -ChildPath "SKILL.md"
 
 # Read content, replace VAULT_ROOT, and write to destination
 $Content = Get-Content -Path $SkillFile -Raw
