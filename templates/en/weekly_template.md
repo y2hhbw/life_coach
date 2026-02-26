@@ -1,6 +1,6 @@
 ---
 type: weekly
-period: {start_date} to {end_date}
+period: "{start_date} to {end_date}"
 tags: [weekly, journal]
 ---
 
