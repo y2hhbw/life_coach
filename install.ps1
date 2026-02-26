@@ -51,19 +51,60 @@ if (-not (Test-Path -Path $VaultPath -PathType Container)) {
 Write-Host "$InstallMsg '$VaultPath'..." -ForegroundColor Cyan
 Write-Host ""
 
+# Determine language directory
+if ($LangChoice -eq "1") {
+    $LangDir = "zh"
+} else {
+    $LangDir = "en"
+}
+
 # Copy folders
 Write-Host $CopyMsg
-Copy-Item -Path "templates" -Destination $VaultPath -Recurse -Force
-Copy-Item -Path "journal" -Destination $VaultPath -Recurse -Force
+$DestTemplates = Join-Path -Path $VaultPath -ChildPath "templates"
+$DestJournal = Join-Path -Path $VaultPath -ChildPath "journal"
+
+if (-not (Test-Path -Path $DestTemplates)) { New-Item -ItemType Directory -Force -Path $DestTemplates | Out-Null }
+if (-not (Test-Path -Path $DestJournal)) { New-Item -ItemType Directory -Force -Path $DestJournal | Out-Null }
+
+Copy-Item -Path "templates\$LangDir\*" -Destination $DestTemplates -Recurse -Force
+Copy-Item -Path "journal\$LangDir\*" -Destination $DestJournal -Recurse -Force
+
+# Tool Selection
+Write-Host ""
+Write-Host "Please select your AI Assistant / 请选择你的 AI 助手:"
+Write-Host "1) Claude Code"
+Write-Host "2) Codex"
+Write-Host "3) Qwen"
+Write-Host "4) Opencode"
+$ToolChoice = Read-Host "Enter choice / 输入选项 (1-4)"
+
+switch ($ToolChoice) {
+    "1" { $SkillsDir = Join-Path -Path $HOME -ChildPath ".claude\skills"; $ToolName = "Claude Code" }
+    "2" { $SkillsDir = Join-Path -Path $HOME -ChildPath ".codex\skills";  $ToolName = "Codex" }
+    "3" { $SkillsDir = Join-Path -Path $HOME -ChildPath ".qwen\skills";   $ToolName = "Qwen" }
+    "4" { $SkillsDir = Join-Path -Path $HOME -ChildPath ".opencode\skills"; $ToolName = "Opencode" }
+    default { 
+        Write-Host "Invalid choice. Defaulting to Claude Code. / 选择无效，默认使用 Claude Code。" -ForegroundColor Yellow
+        $SkillsDir = Join-Path -Path $HOME -ChildPath ".claude\skills"
+        $ToolName = "Claude Code"
+    }
+}
+
+if ($LangChoice -eq "1") {
+    $ConfigMsg = "正在配置 $ToolName Skill..."
+    $DoneMsg = "安装完成！🎉`n请确保正在运行 $ToolName，并使用 '/life-coach morning' 开始。"
+} else {
+    $ConfigMsg = "Configuring $ToolName Skill..."
+    $DoneMsg = "Installation complete! 🎉`nPlease ensure $ToolName is running and use '/life-coach morning' to start."
+}
 
 # Configure Skill
 Write-Host $ConfigMsg
-$ClaudeDir = Join-Path -Path $HOME -ChildPath ".claude\skills"
-if (-not (Test-Path -Path $ClaudeDir)) {
-    New-Item -ItemType Directory -Force -Path $ClaudeDir | Out-Null
+if (-not (Test-Path -Path $SkillsDir)) {
+    New-Item -ItemType Directory -Force -Path $SkillsDir | Out-Null
 }
 
-$DestSkillFile = Join-Path -Path $ClaudeDir -ChildPath "life-coach.md"
+$DestSkillFile = Join-Path -Path $SkillsDir -ChildPath "life-coach.md"
 
 # Read content, replace VAULT_ROOT, and write to destination
 $Content = Get-Content -Path $SkillFile -Raw

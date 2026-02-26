@@ -74,7 +74,11 @@ Your deepest desires, anxieties, financials, and diary details remain entirely s
 ## 📦 How to Install
 
 ### Prerequisites
-- [Claude Code](https://github.com/anthropics/claude-code) CLI tool
+- One of the following AI CLI tools:
+  - [Claude Code](https://github.com/anthropics/claude-code)
+  - Codex
+  - Qwen
+  - Opencode
 - Obsidian (For the ultimate local Markdown note management experience)
 
 ### Setup Steps
@@ -86,7 +90,7 @@ cd ~/projects/life-coach
 ```
 
 2. **Run the Interactive Installation Script**
-The easiest way to install and configure the system is to run the interactive setup script. This will automatically copy the necessary templates and journal folders to your Obsidian vault, and configure the Claude Code Skill.
+The easiest way to install and configure the system is to run the interactive setup script. This will automatically copy the necessary templates and journal folders to your Obsidian vault, and securely link the Skill to your preferred AI Assistant.
 
 - **Mac / Linux:**
   ```bash
@@ -98,7 +102,7 @@ The easiest way to install and configure the system is to run the interactive se
   .\install.ps1
   ```
 
-*Follow the on-screen prompts to select your language (English/Chinese) and provide the absolute path to your Obsidian vault.*
+*Follow the on-screen prompts to select your language, choose your AI Assistant, and provide the absolute path to your Obsidian vault.*
 
 3. **Initialize Core Files**
 Open Obsidian, and create your vision/goal files based on the structure:
@@ -111,7 +115,7 @@ Open Obsidian, and create your vision/goal files based on the structure:
 ## ⚡ Quick Start
 
 1. **Morning Planning**
-   When starting your day, open a terminal with Claude Code loaded and run:
+   When starting your day, open a terminal with your chosen AI Assistant loaded and run:
    ```bash
    /life-coach morning
    ```

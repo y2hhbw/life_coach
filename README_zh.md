@@ -4,7 +4,7 @@
 
 **不再自欺欺人。不再用战术的勤奋掩盖战略的懒惰。**
 
-这是一个基于 Claude Code Skill 构建的无废话 (No BS) 目标管理系统。它不仅帮你拆解长期愿景，更会用严厉的数据和“反向激励（Anti-Vision）”无情地撕破你的拖延借口，确保你度过的每一分钟，都在推动你成为 2028 年那个理想的自己。
+这是一个基于 AI CLI 助手构建的无废话 (No BS) 目标管理系统。它不仅帮你拆解长期愿景，更会用严厉的数据和“反向激励（Anti-Vision）”无情地撕破你的拖延借口，确保你度过的每一分钟，都在推动你成为 2028 年那个理想的自己。
 
 **它不会对你喊“加油”，它只会对你说“去做”。**
 
@@ -75,7 +75,11 @@ graph TD
 ## 📦 如何使用
 
 ### 前置要求
-- [Claude Code](https://github.com/anthropics/claude-code) CLI 工具
+- 以下任意一款 AI CLI 工具：
+  - [Claude Code](https://github.com/anthropics/claude-code)
+  - Codex
+  - Qwen
+  - Opencode
 - Obsidian（用于提供最好的本地 Markdown 笔记管理体验）
 
 ### 安装步骤
@@ -87,7 +91,7 @@ cd ~/projects/life-coach
 ```
 
 2. **运行交互式安装脚本**
-最简单的安装和配置方式是运行交互式安装脚本。它会自动复制所需的模板和日志文件夹到你的 Obsidian 库中，并配置 Claude Code Skill。
+最简单的安装和配置方式是运行交互式安装脚本。它会自动复制所需的模板和日志文件夹到你的 Obsidian 库中，并为你选择的 AI 助手配置 Skill。
 
 - **Mac / Linux:**
   ```bash
@@ -99,7 +103,7 @@ cd ~/projects/life-coach
   .\install.ps1
   ```
 
-*请按照屏幕上的提示选择你的语言（中文/English）并提供你的 Obsidian 库的绝对路径。*
+*请按照屏幕上的提示选择你的语言、选择你的 AI 助手，并提供你的 Obsidian 库的绝对路径。*
 
 3. **初始化核心文件**
 进入你的 Obsidian，根据模板创建自己的愿景和目标文件：
@@ -112,7 +116,7 @@ cd ~/projects/life-coach
 ## ⚡ 快速开始
 
 1. **早间规划**
-   在新的一天开始时，在打开了 Claude Code 的终端中运行：
+   在新的一天开始时，在打开了你选择的 AI 助手的终端中运行：
    ```bash
    /life-coach morning
    ```
