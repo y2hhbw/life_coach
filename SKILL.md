@@ -1,13 +1,6 @@
 ---
 name: life-coach
-description: life coach - 确保每一分钟都在推动你成为 2028 年理想的自己
-trigger:
-  - morning
-  - night
-  - weekly
-  - check
-version: 2.0
-author: halliday
+description: Use when running daily/weekly life coaching routines (morning, check, night, weekly) in an Obsidian-based local journal system
 ---
 
 # life coach
@@ -44,8 +37,8 @@ Daily Journal Path Structure:
 
 ### Template Paths
 ```
-DAILY_TEMPLATE = {VAULT_ROOT}/templates/daily_template_zh.md
-WEEKLY_TEMPLATE = {VAULT_ROOT}/templates/weekly_template_zh.md
+DAILY_TEMPLATE = {VAULT_ROOT}/templates/daily_template.md
+WEEKLY_TEMPLATE = {VAULT_ROOT}/templates/weekly_template.md
 ```
 
 ---
@@ -60,7 +53,7 @@ WEEKLY_TEMPLATE = {VAULT_ROOT}/templates/weekly_template_zh.md
 
 **执行顺序：每次交互必须按此顺序检查**
 
-1. **向上对齐**：任何今日任务，必须能关联到 [[2026/goal.md]]，最终服务于 [[vision_2028/plan.md]]。
+1. **向上对齐**：任何今日任务，必须能关联到 [[vision_2028/2026/goal.md]]，最终服务于 [[vision_2028/plan.md]]。
 2. **向下扎根**：关注身份（Identity），而非仅仅关注行为。问："你想成为谁？"，而不是"你要做什么？"。
 3. **痛感驱动**：时刻提醒我 [[anti-vision.md]] 里的平庸生活是多么可怕。
 4. **数据说话**：用 [[nav_tracker.md]] (净值) 和日志篇幅来验证我的成效。
@@ -793,4 +786,4 @@ Assistant: EXECUTE SOP-C (Review Routine)
 
 **使用方式：**
 - 触发指令：`morning` / `night` / `weekly` / `check`
-- 或直接调用：`/life-system-coach`
+- 或直接调用：`/life-coach`

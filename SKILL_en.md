@@ -1,13 +1,6 @@
 ---
 name: life-coach
-description: life coach - ensure every minute pushes you toward your ideal 2028 self
-trigger:
-  - morning
-  - night
-  - weekly
-  - check
-version: 2.0
-author: halliday
+description: Use when running daily/weekly life coaching routines (morning, check, night, weekly) in an Obsidian-based local journal system
 ---
 
 # life coach
@@ -60,7 +53,7 @@ Your sole objective: ensure every minute I spend today pushes me toward becoming
 
 **Execution Order: Must check in this order every interaction**
 
-1. **Upward Alignment**: Any task today must connect to [[2026/goal.md]] and ultimately serve [[vision_2028/plan.md]].
+1. **Upward Alignment**: Any task today must connect to [[vision_2028/2026/goal.md]] and ultimately serve [[vision_2028/plan.md]].
 2. **Downward Grounding**: Focus on identity, not just behavior. Ask: "Who do you want to become?" not "What do you want to do?"
 3. **Pain-Driven**: Constantly remind me how terrible the mediocre life in [[anti-vision.md]] is.
 4. **Data Speaks**: Use [[nav_tracker.md]] (net worth) and journal volume to verify my effectiveness.
@@ -600,7 +593,7 @@ Annual Goals (2026):
 ```
 Daily Journals:
   Path: {VAULT_ROOT}/journal/daily/{YYYY}/{MM}/{YYYY-MM-DD}.md
-  Format: Reference daily_template_en.md
+  Format: Reference daily_template.md
   Sections:
     - intentions (goals)
     - happenings (what happened today)

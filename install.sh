@@ -1,5 +1,7 @@
 #!/bin/bash
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Function to print messages based on language choice
 print_msg() {
     local msg_en="$1"
@@ -10,6 +12,15 @@ print_msg() {
         echo -e "$msg_zh"
     else
         echo -e "$msg_en"
+    fi
+}
+
+# Copy file if destination file does not exist
+copy_if_missing() {
+    local src="$1"
+    local dest="$2"
+    if [ ! -f "$dest" ]; then
+        cp "$src" "$dest"
     fi
 }
 
@@ -31,9 +42,9 @@ if [ "$LANG_CHOICE" != "1" ] && [ "$LANG_CHOICE" != "2" ]; then
 fi
 
 if [ "$LANG_CHOICE" = "1" ]; then
-    SKILL_FILE="SKILL.md"
+    SKILL_FILE="$SCRIPT_DIR/SKILL.md"
 else
-    SKILL_FILE="SKILL_en.md"
+    SKILL_FILE="$SCRIPT_DIR/SKILL_en.md"
 fi
 
 echo ""
@@ -60,11 +71,17 @@ else
 fi
 
 # Copy files
-print_msg "Copying templates and journal folders..." "正在复制模板和日志文件夹..."
+print_msg "Copying templates and journal folders (without overwriting existing files)..." "正在复制模板和日志文件夹（不会覆盖已有文件）..."
 mkdir -p "$VAULT_PATH/templates"
 mkdir -p "$VAULT_PATH/journal"
-cp -r "templates/$LANG_DIR/"* "$VAULT_PATH/templates/"
-cp -r "journal/$LANG_DIR/"* "$VAULT_PATH/journal/"
+cp -rn "$SCRIPT_DIR/templates/$LANG_DIR/." "$VAULT_PATH/templates/"
+cp -rn "$SCRIPT_DIR/journal/$LANG_DIR/." "$VAULT_PATH/journal/"
+
+# Install goal template only if missing
+GOAL_DEST="$VAULT_PATH/journal/vision_2028/2026/goal.md"
+GOAL_TEMPLATE="$SCRIPT_DIR/templates/$LANG_DIR/goal_template.md"
+mkdir -p "$(dirname "$GOAL_DEST")"
+copy_if_missing "$GOAL_TEMPLATE" "$GOAL_DEST"
 
 # Tool Selection
 echo ""

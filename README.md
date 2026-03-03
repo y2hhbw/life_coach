@@ -4,7 +4,7 @@
 
 **Stop lying to yourself. Stop using tactical diligence to cover up strategic laziness.**
 
-This is a No-BS goal management system run by a custom Claude Code Skill. It doesn't just break down your long-term vision; it uses harsh numbers and "Anti-Vision" to tear through your procrastination excuses, ensuring every minute you spend pushes you toward your ideal 2028 self.
+This is a No-BS goal management system run by a custom AI CLI Skill. It doesn't just break down your long-term vision; it uses harsh numbers and "Anti-Vision" to tear through your procrastination excuses, ensuring every minute you spend pushes you toward your ideal 2028 self.
 
 **It won't tell you "You can do it". It will tell you "Go do it."**
 
@@ -18,7 +18,7 @@ Life Coach combines **top-down goal breakdown** with **negative motivation (Pain
 graph TD
     A[3-Year Vision 2028] -->|Top-Down Breakdown| B(1-Year Goal 2026)
     B -->|Guides Daily Actions| C{Daily Journal}
-    C -->|Morning: Plan & Align| D[Claude Code Skill]
+    C -->|Morning: Plan & Align| D[AI CLI Skill]
     C -->|Check: Status Correct| D
     C -->|Night/Weekly: Review| D
     E[Anti-Vision Nightmare] -.->|Pain-driven| D
@@ -66,8 +66,13 @@ The system runs 8 harsh diagnostic lenses to automatically check and slap you ba
 
 ## 🚀 Why Life Coach?
 
-🔐 **Absolute Data Privacy (Local-First Obsidian)**  
-Your deepest desires, anxieties, financials, and diary details remain entirely stored in your local Obsidian vault. The system only reads and streams them to Claude for analysis during runtime, offering the **perfect blend of absolute privacy and AI power**.
+🔐 **Local-First Data Privacy (Obsidian)**  
+Your deepest desires, anxieties, financials, and diary details remain in your local Obsidian vault. During command runtime, relevant content is sent to your configured AI model API for analysis, while files stay in your local vault.
+
+### Safety by Default
+- Installer uses non-destructive copy mode by default (`existing files are not overwritten`).
+- If `journal/vision_2028/2026/goal.md` is missing, installer creates it from language-specific template.
+- Existing journal history in your vault is preserved.
 
 ---
 
@@ -90,7 +95,7 @@ cd ~/projects/life-coach
 ```
 
 2. **Run the Interactive Installation Script**
-The easiest way to install and configure the system is to run the interactive setup script. This will automatically copy the necessary templates and journal folders to your Obsidian vault, and securely link the Skill to your preferred AI Assistant.
+The easiest way to install and configure the system is to run the interactive setup script. This will copy the necessary templates and journal folders to your Obsidian vault in non-destructive mode, and link the Skill to your preferred AI Assistant.
 
 - **Mac / Linux:**
   ```bash
@@ -105,10 +110,28 @@ The easiest way to install and configure the system is to run the interactive se
 *Follow the on-screen prompts to select your language, choose your AI Assistant, and provide the absolute path to your Obsidian vault.*
 
 3. **Initialize Core Files**
-Open Obsidian, and create your vision/goal files based on the structure:
+Open Obsidian and fill in these files:
 - `journal/vision_2028/plan.md` - Define your 2028 vision
 - `journal/vision_2028/anti-vision.md` - The nightmare future to avoid
-- `journal/vision_2028/2026/goal.md` - 2026 annual goals
+- `journal/vision_2028/2026/goal.md` - 2026 annual goals (created from template by installer if missing)
+
+4. **Confirm Vault Structure**
+After installation, your vault should include:
+```text
+journal/
+  vision_2028/
+    plan.md
+    anti-vision.md
+    2026/
+      goal.md
+  daily/
+    YYYY/MM/YYYY-MM-DD.md
+  weekly/
+templates/
+  daily_template.md
+  weekly_template.md
+  goal_template.md
+```
 
 ---
 
@@ -136,6 +159,22 @@ Open Obsidian, and create your vision/goal files based on the structure:
 
 ---
 
+## 🛠️ Troubleshooting
+
+- **`Core file missing: goal.md`**  
+  Ensure `journal/vision_2028/2026/goal.md` exists in your Obsidian vault.
+
+- **`No journal created today`**  
+  Run `/life-coach morning` first, then use `/life-coach check` or `/life-coach night`.
+
+- **Skill not found in your AI CLI**  
+  Re-run installer and verify you selected the correct assistant (`Claude Code` / `Codex` / `Qwen` / `Opencode`).
+
+- **Template not applied as expected**  
+  Re-run installer using an absolute script path and verify your selected language.
+
+---
+
 ## 💡 Support & Donation
 
 If you feel this hardcore Life Coach system is altering the trajectory of your life, support the development:
@@ -151,4 +190,4 @@ If you feel this hardcore Life Coach system is altering the trajectory of your l
 
 ## 📄 License
 
-MIT
+[MIT](LICENSE)

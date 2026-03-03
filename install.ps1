@@ -8,6 +8,28 @@ Write-Host "    Life Coach System Installation Script       "
 Write-Host "    Life Coach 系统安装脚本                     "
 Write-Host "================================================"
 Write-Host ""
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+
+function Copy-MissingTree {
+    param(
+        [Parameter(Mandatory = $true)][string]$SourceRoot,
+        [Parameter(Mandatory = $true)][string]$DestinationRoot
+    )
+
+    Get-ChildItem -Path $SourceRoot -Recurse -File | ForEach-Object {
+        $relativePath = $_.FullName.Substring($SourceRoot.Length).TrimStart('\', '/')
+        $destFile = Join-Path -Path $DestinationRoot -ChildPath $relativePath
+        $destDir = Split-Path -Path $destFile -Parent
+
+        if (-not (Test-Path -Path $destDir)) {
+            New-Item -ItemType Directory -Force -Path $destDir | Out-Null
+        }
+
+        if (-not (Test-Path -Path $destFile -PathType Leaf)) {
+            Copy-Item -Path $_.FullName -Destination $destFile -Force
+        }
+    }
+}
 
 # Language Selection
 Write-Host "Please select your language / 请选择你的语言:"
@@ -21,19 +43,19 @@ if ($LangChoice -ne "1" -and $LangChoice -ne "2") {
 }
 
 if ($LangChoice -eq "1") {
-    $SkillFile = "SKILL.md"
+    $SkillFile = Join-Path -Path $ScriptDir -ChildPath "SKILL.md"
     $PromptMsg = "请输入你的 Obsidian 库的绝对路径。`n(例如: C:\Users\yourname\Documents\Obsidian)"
     $ErrorMsg = "错误：目录不存在！"
     $InstallMsg = "正在安装 Life Coach 到"
-    $CopyMsg = "正在复制模板和日志文件夹..."
+    $CopyMsg = "正在复制模板和日志文件夹（不会覆盖已有文件）..."
     $ConfigMsg = "正在配置 Claude Code Skill..."
     $DoneMsg = "安装完成！🎉`n请确保正在运行 Claude Code，并使用 '/life-coach morning' 开始。"
 } else {
-    $SkillFile = "SKILL_en.md"
+    $SkillFile = Join-Path -Path $ScriptDir -ChildPath "SKILL_en.md"
     $PromptMsg = "Please enter the absolute path to your Obsidian Vault.`n(e.g., C:\Users\yourname\Documents\Obsidian)"
     $ErrorMsg = "Error: The directory does not exist!"
     $InstallMsg = "Installing Life Coach to"
-    $CopyMsg = "Copying templates and journal folders..."
+    $CopyMsg = "Copying templates and journal folders (without overwriting existing files)..."
     $ConfigMsg = "Configuring Claude Code Skill..."
     $DoneMsg = "Installation complete! 🎉`nPlease ensure Claude Code is running and use '/life-coach morning' to start."
 }
@@ -66,8 +88,21 @@ $DestJournal = Join-Path -Path $VaultPath -ChildPath "journal"
 if (-not (Test-Path -Path $DestTemplates)) { New-Item -ItemType Directory -Force -Path $DestTemplates | Out-Null }
 if (-not (Test-Path -Path $DestJournal)) { New-Item -ItemType Directory -Force -Path $DestJournal | Out-Null }
 
-Copy-Item -Path "templates\$LangDir\*" -Destination $DestTemplates -Recurse -Force
-Copy-Item -Path "journal\$LangDir\*" -Destination $DestJournal -Recurse -Force
+$SourceTemplates = Join-Path -Path $ScriptDir -ChildPath "templates\$LangDir"
+$SourceJournal = Join-Path -Path $ScriptDir -ChildPath "journal\$LangDir"
+Copy-MissingTree -SourceRoot $SourceTemplates -DestinationRoot $DestTemplates
+Copy-MissingTree -SourceRoot $SourceJournal -DestinationRoot $DestJournal
+
+# Install goal template only if missing
+$GoalDest = Join-Path -Path $VaultPath -ChildPath "journal\vision_2028\2026\goal.md"
+$GoalTemplate = Join-Path -Path $SourceTemplates -ChildPath "goal_template.md"
+$GoalDestDir = Split-Path -Path $GoalDest -Parent
+if (-not (Test-Path -Path $GoalDestDir)) {
+    New-Item -ItemType Directory -Force -Path $GoalDestDir | Out-Null
+}
+if (-not (Test-Path -Path $GoalDest -PathType Leaf)) {
+    Copy-Item -Path $GoalTemplate -Destination $GoalDest -Force
+}
 
 # Tool Selection
 Write-Host ""

@@ -4,7 +4,7 @@
 
 **不再自欺欺人。不再用战术的勤奋掩盖战略的懒惰。**
 
-这是一个基于 AI CLI 助手构建的无废话 (No BS) 目标管理系统。它不仅帮你拆解长期愿景，更会用严厉的数据和“反向激励（Anti-Vision）”无情地撕破你的拖延借口，确保你度过的每一分钟，都在推动你成为 2028 年那个理想的自己。
+这是一个基于 AI CLI Skill 构建的无废话 (No BS) 目标管理系统。它不仅帮你拆解长期愿景，更会用严厉的数据和“反向激励（Anti-Vision）”无情地撕破你的拖延借口，确保你度过的每一分钟，都在推动你成为 2028 年那个理想的自己。
 
 **它不会对你喊“加油”，它只会对你说“去做”。**
 
@@ -18,7 +18,7 @@ Life Coach 采用**自上而下的目标分解**和**反向激励**相结合的�
 graph TD
     A[3年愿景 Vision 2028] -->|自上而下分解| B(1年计划 Goal 2026)
     B -->|指导每日行动| C{每日日志 Daily Journal}
-    C -->|Morning: 规划与对齐| D[Claude Code Skill]
+    C -->|Morning: 规划与对齐| D[AI CLI Skill]
     C -->|Check: 状态与纠偏| D
     C -->|Night/Weekly: 复盘与诊断| D
     E[噩梦防线 Anti-Vision] -.->|痛感驱动| D
@@ -67,8 +67,13 @@ graph TD
 
 ## 🚀 为什么选择 Life Coach？
 
-🔐 **绝对的数据隐私（基于本地 Obsidian）**  
-你最深层的渴望、焦虑、财务状况和日记细节，完全保存在你本地的 Obsidian 库中。系统只在运行命令时读取并发送给 Claude 进行分析，真正做到了**数据隐私安全与 AI 赋能的完美结合**。
+🔐 **本地优先的数据隐私（基于 Obsidian）**  
+你最深层的渴望、焦虑、财务状况和日记细节都保存在本地 Obsidian 库中。系统仅在执行命令时，将相关内容发送到你配置的 AI 模型 API 进行分析，文件本身仍保留在本地 Vault。
+
+### 默认安全策略
+- 安装器默认使用非覆盖复制模式（不会覆盖已有文件）。
+- 若 `journal/vision_2028/2026/goal.md` 不存在，安装器会按语言模板自动创建。
+- 你已有的日志历史会被保留。
 
 ---
 
@@ -91,7 +96,7 @@ cd ~/projects/life-coach
 ```
 
 2. **运行交互式安装脚本**
-最简单的安装和配置方式是运行交互式安装脚本。它会自动复制所需的模板和日志文件夹到你的 Obsidian 库中，并为你选择的 AI 助手配置 Skill。
+最简单的安装和配置方式是运行交互式安装脚本。它会以非覆盖模式复制所需模板和日志文件夹到你的 Obsidian 库中，并为你选择的 AI 助手配置 Skill。
 
 - **Mac / Linux:**
   ```bash
@@ -106,10 +111,28 @@ cd ~/projects/life-coach
 *请按照屏幕上的提示选择你的语言、选择你的 AI 助手，并提供你的 Obsidian 库的绝对路径。*
 
 3. **初始化核心文件**
-进入你的 Obsidian，根据模板创建自己的愿景和目标文件：
+进入你的 Obsidian，完善以下文件内容：
 - `journal/vision_2028/plan.md` - 定义你的 2028 年愿景
 - `journal/vision_2028/anti-vision.md` - 描述你想避免的未来
-- `journal/vision_2028/2026/goal.md` - 设定 2026 年度目标
+- `journal/vision_2028/2026/goal.md` - 设定 2026 年度目标（若不存在，安装器会按语言模板自动创建）
+
+4. **确认目录结构**
+安装后，你的 Vault 应至少包含：
+```text
+journal/
+  vision_2028/
+    plan.md
+    anti-vision.md
+    2026/
+      goal.md
+  daily/
+    YYYY/MM/YYYY-MM-DD.md
+  weekly/
+templates/
+  daily_template.md
+  weekly_template.md
+  goal_template.md
+```
 
 ---
 
@@ -137,6 +160,22 @@ cd ~/projects/life-coach
 
 ---
 
+## 🛠️ 故障排查
+
+- **`Core file missing: goal.md`**  
+  请确认你的 Obsidian Vault 中存在 `journal/vision_2028/2026/goal.md`。
+
+- **`No journal created today`**  
+  先执行 `/life-coach morning`，再使用 `/life-coach check` 或 `/life-coach night`。
+
+- **AI CLI 中找不到 Skill**  
+  重新运行安装脚本，并确认你选择了正确的助手（`Claude Code` / `Codex` / `Qwen` / `Opencode`）。
+
+- **模板未按预期生效**  
+  使用安装脚本的绝对路径重新执行，并确认语言选择正确。
+
+---
+
 ## 💡 Support & Donation
 
 如果你觉得这个硬核 Life Coach 系统正在改变你的生活轨迹，欢迎支持开发：
@@ -152,4 +191,4 @@ cd ~/projects/life-coach
 
 ## 📄 License
 
-MIT
+[MIT](LICENSE)
