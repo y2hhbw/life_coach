@@ -462,12 +462,12 @@ STEP 6: Auto-append record
   ACTION: Read current daily file
 
   IF user specifies "happenings" THEN
-    LOCATE: "## Happenings" section
+    LOCATE (case-insensitive): "# happenings" / "## happenings" / "# 发生的事" / "## 发生的事" section
     APPEND after last entry:
       "- [{HH:mm}] - [user provided content]"
 
   IF user specifies "feelings" THEN
-    LOCATE: "## Feelings" section
+    LOCATE (case-insensitive): "# feelings" / "## feelings" / "# 感受" / "## 感受" section
     APPEND after last entry:
       "- [{HH:mm}] - [user provided content]"
 
@@ -499,9 +499,9 @@ STEP 2: Read relevant data
       EXIT
 
   ELSE IF review_type == "weekly" THEN
-    ACTION: Calculate week range (Saturday to Friday)
-    ACTION: Glob {DAILY_DIR}/{YYYY}/{MM}/*.md (all journals this week)
-    ACTION: Read all weekly daily files
+    ACTION: Calculate 7-day review range (end_date = today, start_date = end_date - 6 days)
+    ACTION: Glob {DAILY_DIR}/**/*.md and filter files within [start_date, end_date]
+    ACTION: Read all filtered daily files
     ACTION: Read {NAV_TRACKER}
     ACTION: Read {WEEKLY_TEMPLATE}
 
@@ -604,7 +604,7 @@ Daily Journals:
 
 Weekly Reviews:
   Path: {VAULT_ROOT}/journal/weekly/{start_date}_{end_date}.md
-  Format: 2026-02-07_2026-02-13.md (Saturday to Friday)
+  Format: 2026-02-07_2026-02-13.md (7-day window: start_date to end_date)
   Purpose: Weekly strategic review and NAV analysis
   Trigger: weekly
 ```

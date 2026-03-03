@@ -72,6 +72,7 @@ Your deepest desires, anxieties, financials, and diary details remain in your lo
 ### Safety by Default
 - Installer uses non-destructive copy mode by default (`existing files are not overwritten`).
 - If `journal/vision_2028/2026/goal.md` is missing, installer creates it from language-specific template.
+- Installer creates a clean journal structure and does not import sample daily/weekly history.
 - Existing journal history in your vault is preserved.
 
 ---
@@ -157,6 +158,13 @@ templates/
    /life-coach weekly    # Strategic weekly report
    ```
 
+## 🧭 Command Invocation (Multi-Assistant)
+
+- Preferred: call the skill directly with mode, e.g. `/life-coach morning`
+- If your assistant does not support slash command + args in one line:
+  - Invoke skill first: `/life-coach`
+  - Then send mode keyword in next message: `morning` / `check` / `night` / `weekly`
+
 ---
 
 ## 🛠️ Troubleshooting
@@ -169,6 +177,9 @@ templates/
 
 - **Skill not found in your AI CLI**  
   Re-run installer and verify you selected the correct assistant (`Claude Code` / `Codex` / `Qwen` / `Opencode`).
+
+- **Slash command behavior differs across assistants**  
+  Invoke `/life-coach` first, then send `morning` / `check` / `night` / `weekly` as a follow-up message.
 
 - **Template not applied as expected**  
   Re-run installer using an absolute script path and verify your selected language.

@@ -31,6 +31,22 @@ function Copy-MissingTree {
     }
 }
 
+function Copy-IfMissing {
+    param(
+        [Parameter(Mandatory = $true)][string]$SourceFile,
+        [Parameter(Mandatory = $true)][string]$DestinationFile
+    )
+
+    $destDir = Split-Path -Path $DestinationFile -Parent
+    if (-not (Test-Path -Path $destDir)) {
+        New-Item -ItemType Directory -Force -Path $destDir | Out-Null
+    }
+
+    if (-not (Test-Path -Path $DestinationFile -PathType Leaf)) {
+        Copy-Item -Path $SourceFile -Destination $DestinationFile -Force
+    }
+}
+
 # Language Selection
 Write-Host "Please select your language / 请选择你的语言:"
 Write-Host "1) 中文 (Chinese)"
@@ -47,7 +63,7 @@ if ($LangChoice -eq "1") {
     $PromptMsg = "请输入你的 Obsidian 库的绝对路径。`n(例如: C:\Users\yourname\Documents\Obsidian)"
     $ErrorMsg = "错误：目录不存在！"
     $InstallMsg = "正在安装 Life Coach 到"
-    $CopyMsg = "正在复制模板和日志文件夹（不会覆盖已有文件）..."
+    $CopyMsg = "正在复制模板并创建日志结构（不会覆盖已有文件）..."
     $ConfigMsg = "正在配置 Claude Code Skill..."
     $DoneMsg = "安装完成！🎉`n请确保正在运行 Claude Code，并使用 '/life-coach morning' 开始。"
 } else {
@@ -55,7 +71,7 @@ if ($LangChoice -eq "1") {
     $PromptMsg = "Please enter the absolute path to your Obsidian Vault.`n(e.g., C:\Users\yourname\Documents\Obsidian)"
     $ErrorMsg = "Error: The directory does not exist!"
     $InstallMsg = "Installing Life Coach to"
-    $CopyMsg = "Copying templates and journal folders (without overwriting existing files)..."
+    $CopyMsg = "Copying templates and creating journal structure (without overwriting existing files)..."
     $ConfigMsg = "Configuring Claude Code Skill..."
     $DoneMsg = "Installation complete! 🎉`nPlease ensure Claude Code is running and use '/life-coach morning' to start."
 }
@@ -91,7 +107,18 @@ if (-not (Test-Path -Path $DestJournal)) { New-Item -ItemType Directory -Force -
 $SourceTemplates = Join-Path -Path $ScriptDir -ChildPath "templates\$LangDir"
 $SourceJournal = Join-Path -Path $ScriptDir -ChildPath "journal\$LangDir"
 Copy-MissingTree -SourceRoot $SourceTemplates -DestinationRoot $DestTemplates
-Copy-MissingTree -SourceRoot $SourceJournal -DestinationRoot $DestJournal
+
+# Create clean journal structure (no sample history data)
+$VisionDir = Join-Path -Path $VaultPath -ChildPath "journal\vision_2028"
+$DailyDir = Join-Path -Path $VaultPath -ChildPath "journal\daily"
+$WeeklyDir = Join-Path -Path $VaultPath -ChildPath "journal\weekly"
+if (-not (Test-Path -Path $VisionDir)) { New-Item -ItemType Directory -Force -Path $VisionDir | Out-Null }
+if (-not (Test-Path -Path $DailyDir)) { New-Item -ItemType Directory -Force -Path $DailyDir | Out-Null }
+if (-not (Test-Path -Path $WeeklyDir)) { New-Item -ItemType Directory -Force -Path $WeeklyDir | Out-Null }
+
+# Install core strategy files only if missing
+Copy-IfMissing -SourceFile (Join-Path -Path $SourceJournal -ChildPath "vision_2028\plan.md") -DestinationFile (Join-Path -Path $VisionDir -ChildPath "plan.md")
+Copy-IfMissing -SourceFile (Join-Path -Path $SourceJournal -ChildPath "vision_2028\anti-vision.md") -DestinationFile (Join-Path -Path $VisionDir -ChildPath "anti-vision.md")
 
 # Install goal template only if missing
 $GoalDest = Join-Path -Path $VaultPath -ChildPath "journal\vision_2028\2026\goal.md"
@@ -102,6 +129,13 @@ if (-not (Test-Path -Path $GoalDestDir)) {
 }
 if (-not (Test-Path -Path $GoalDest -PathType Leaf)) {
     Copy-Item -Path $GoalTemplate -Destination $GoalDest -Force
+}
+
+# Install NAV template only if missing
+$NavDest = Join-Path -Path $VaultPath -ChildPath "journal\nav_tracker.md"
+$NavTemplate = Join-Path -Path $SourceTemplates -ChildPath "nav_template.md"
+if (-not (Test-Path -Path $NavDest -PathType Leaf)) {
+    Copy-Item -Path $NavTemplate -Destination $NavDest -Force
 }
 
 # Tool Selection

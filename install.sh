@@ -71,17 +71,30 @@ else
 fi
 
 # Copy files
-print_msg "Copying templates and journal folders (without overwriting existing files)..." "正在复制模板和日志文件夹（不会覆盖已有文件）..."
+print_msg "Copying templates and creating journal structure (without overwriting existing files)..." "正在复制模板并创建日志结构（不会覆盖已有文件）..."
 mkdir -p "$VAULT_PATH/templates"
 mkdir -p "$VAULT_PATH/journal"
 cp -rn "$SCRIPT_DIR/templates/$LANG_DIR/." "$VAULT_PATH/templates/"
-cp -rn "$SCRIPT_DIR/journal/$LANG_DIR/." "$VAULT_PATH/journal/"
+
+# Create clean journal structure (no sample history data)
+mkdir -p "$VAULT_PATH/journal/vision_2028"
+mkdir -p "$VAULT_PATH/journal/daily"
+mkdir -p "$VAULT_PATH/journal/weekly"
+
+# Install core strategy files only if missing
+copy_if_missing "$SCRIPT_DIR/journal/$LANG_DIR/vision_2028/plan.md" "$VAULT_PATH/journal/vision_2028/plan.md"
+copy_if_missing "$SCRIPT_DIR/journal/$LANG_DIR/vision_2028/anti-vision.md" "$VAULT_PATH/journal/vision_2028/anti-vision.md"
 
 # Install goal template only if missing
 GOAL_DEST="$VAULT_PATH/journal/vision_2028/2026/goal.md"
 GOAL_TEMPLATE="$SCRIPT_DIR/templates/$LANG_DIR/goal_template.md"
 mkdir -p "$(dirname "$GOAL_DEST")"
 copy_if_missing "$GOAL_TEMPLATE" "$GOAL_DEST"
+
+# Install NAV template only if missing
+NAV_DEST="$VAULT_PATH/journal/nav_tracker.md"
+NAV_TEMPLATE="$SCRIPT_DIR/templates/$LANG_DIR/nav_template.md"
+copy_if_missing "$NAV_TEMPLATE" "$NAV_DEST"
 
 # Tool Selection
 echo ""

@@ -1,7 +1,3 @@
----
-cssclass: wide-table
----
-
 | date       | account-1 | account-2 | account-3 | account-4 | account-5 | total  | comments |
 | ---------- | --------- | --------- | --------- | --------- | --------- | ------ | -------- |
 | 2025-12-31 | 50000     | 30000     | 20000     | 15000     | 10000     | 125000 | initial  |

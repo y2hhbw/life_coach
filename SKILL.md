@@ -201,7 +201,7 @@ IF feelings content shows negative emotions (semantic analysis) THEN
 **执行步骤：**
 ```
 STEP 1: Glob {DAILY_DIR}/**/*.md (recent 30 days)
-STEP 2: Grep for "grateful for" entries
+STEP 2: Grep for "grateful for" / "感恩" entries
 STEP 3: Extract 2-3 specific achievements
 STEP 4: OUTPUT:
   "情绪支柱：
@@ -462,12 +462,12 @@ STEP 6: 自动追加记录
   ACTION: Read current daily file
 
   IF user specifies "happenings" THEN
-    LOCATE: "## Happenings" / "## 发生的事" section
+    LOCATE (case-insensitive): "# happenings" / "## happenings" / "# 发生的事" / "## 发生的事" section
     APPEND after last entry:
       "- [{HH:mm}] - [用户提供的内容]"
 
   IF user specifies "feelings" THEN
-    LOCATE: "## Feelings" / "## 感受" section
+    LOCATE (case-insensitive): "# feelings" / "## feelings" / "# 感受" / "## 感受" section
     APPEND after last entry:
       "- [{HH:mm}] - [用户提供的内容]"
 
@@ -499,9 +499,9 @@ STEP 2: 读取相关数据
       EXIT
 
   ELSE IF review_type == "weekly" THEN
-    ACTION: Calculate week range (Saturday to Friday)
-    ACTION: Glob {DAILY_DIR}/{YYYY}/{MM}/*.md (本周所有日志)
-    ACTION: Read all weekly daily files
+    ACTION: Calculate 7-day review range (end_date = today, start_date = end_date - 6 days)
+    ACTION: Glob {DAILY_DIR}/**/*.md and filter files within [start_date, end_date]
+    ACTION: Read all filtered daily files
     ACTION: Read {NAV_TRACKER}
     ACTION: Read {WEEKLY_TEMPLATE}
 
@@ -593,7 +593,7 @@ OUTPUT: "复盘完成。"
 ```
 每日日志:
   Path: {VAULT_ROOT}/journal/daily/{YYYY}/{MM}/{YYYY-MM-DD}.md
-  Format: 参考 journal_template.md
+  Format: 参考 daily_template.md
   Sections:
     - intentions (goal)
     - happenings (bad things that happened today)
@@ -604,7 +604,7 @@ OUTPUT: "复盘完成。"
 
 周复盘:
   Path: {VAULT_ROOT}/journal/weekly/{start_date}_{end_date}.md
-  Format: 2026-02-07_2026-02-13.md (Saturday to Friday)
+  Format: 2026-02-07_2026-02-13.md (7-day window: start_date to end_date)
   Purpose: 每周战略复盘和净值分析
   Trigger: weekly
 ```
